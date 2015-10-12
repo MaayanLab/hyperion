@@ -8,16 +8,20 @@ __contact__ = "avi.maayan@mssm.edu"
 
 import logging
 import sys
+import configparser
 
 from flask import Flask
 
-from hyperion.config import Config
+import hyperion.tester as reg
 
 
-app = Flask(__name__, static_url_path='/hyperion/static', static_folder='static')
+config = configparser.ConfigParser()
+config.read('hyperion/app.ini')
 
+static_url_path = '/%s/static' % config['DEFAULT']['app_name']
+app = Flask(__name__, static_url_path=static_url_path, static_folder='static')
 
-if not Config.DEBUG:
+if not config.getboolean('DEFAULT', 'debug'):
     # Configure Apache logging.
     logging.basicConfig(stream=sys.stderr)
 else:
@@ -27,8 +31,9 @@ else:
 
 # Import these after connecting to the DB, if necessary.
 from hyperion.endpoints.base import base
-
 app.register_blueprint(base)
 
-# Import health checkers
-import hyperion.apps.harmonizome
+# Import health checkers and start checking.
+from hyperion.apps.harmonizome.checkgeneendpoint import CheckGeneEndpoint
+reg.register_health_check(CheckGeneEndpoint())
+reg.start()

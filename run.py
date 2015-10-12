@@ -4,5 +4,5 @@
 
 
 from hyperion import app
-app.debug=True
+app.debug = True
 app.run(port=8080, host='0.0.0.0')
