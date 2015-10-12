@@ -7,47 +7,65 @@ import sched
 import time
 
 
-health_checks = []
+health_checks = {}
 s = sched.scheduler(time.time, time.sleep)
-event = None
 
 
-def register_health_check(checker):
-    health_checks.append(checker)
+def register_health_check(app_name, check):
+    if not app_name in health_checks:
+        health_checks[app_name] = []
+    health_checks[app_name].append(check)
 
 
-def _check_all(sc):
-    for hc in health_checks:
-        hc.time_passed += 1
-        if hc.time_passed != hc.interval_secs:
-            continue
-
-        print('Checking "%s"' % hc.name)
-        hc.reset()
-        if hc.is_healthy():
-            hc.already_notified = False
-            continue
-
-        if hc.already_notified:
-            continue
-
-        hc.already_notified = True
-        hc.on_fail()
-
-    sc.enter(1, 1, _check_all, (sc,))
+def register_health_checks(checks):
+    global health_checks
+    health_checks = health_checks + checks
 
 
 def get_status():
     results = []
-    for hc in health_checks:
-        results.append({
-            'name': hc.name,
-            'status': 'healthy' if hc.is_healthy() else 'broken'
-        })
+    for app in health_checks:
+        result = {
+            'app': app,
+            'tests': []
+        }
+        for hc in health_checks[app]:
+            result['tests'].append({
+                'name': hc.name,
+                'status': 'healthy' if hc.is_healthy() else 'broken'
+            })
+        results.append(result)
     return results
 
 
+def _check_apps(sc):
+    for app in health_checks:
+        for hc in health_checks[app]:
+            hc.time_passed += 1
+            if hc.time_passed != hc.interval_secs:
+                continue
+
+            print('Checking "%s"' % hc.name)
+            hc.reset()
+            if hc.is_healthy():
+                hc.already_notified = False
+                continue
+
+            if hc.already_notified:
+                continue
+
+            hc.already_notified = True
+            hc.on_fail()
+
+    sc.enter(1, 1, _check_apps, (sc,))
+
+
+def _start():
+    print('Starting health checks.')
+    s.enter(1, 1, _check_apps, (s,))
+    s.run()
+
+
 def start():
-    s.enter(1, 1, _check_all, (s,))
-    t = threading.Thread(target=s.run, daemon=True)
+    t = threading.Thread(target=_start, daemon=True)
     t.start()

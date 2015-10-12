@@ -6,6 +6,8 @@ __contact__ = "avi.maayan@mssm.edu"
 """
 
 
+import json
+
 from flask import Blueprint, render_template
 
 from hyperion import config
@@ -18,6 +20,4 @@ base = Blueprint('base', __name__, url_prefix=config['DEFAULT']['base_url'])
 @base.route('')
 def index_page():
     results = tester.get_status()
-    #return render_template('index.html')
-    import json
     return json.dumps(results)

@@ -34,6 +34,5 @@ from hyperion.endpoints.base import base
 app.register_blueprint(base)
 
 # Import health checkers and start checking.
-from hyperion.apps.harmonizome.checkgeneendpoint import CheckGeneEndpoint
-reg.register_health_check(CheckGeneEndpoint())
+import hyperion.apps.harmonizome
 reg.start()

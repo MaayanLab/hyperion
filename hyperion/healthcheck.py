@@ -2,13 +2,13 @@
 """
 
 
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta, abstractmethod, abstractproperty
 
-from hyperion import config
+#from hyperion import config
 
 
-DEBUG = config.getboolean('DEFAULT', 'debug')
-MIN_INTERVAL = 1 if DEBUG else 60
+#DEBUG = config.getboolean('DEFAULT', 'debug')
+MIN_INTERVAL = 1#1 if DEBUG else 60
 
 
 class HealthCheck(object):
@@ -21,6 +21,10 @@ class HealthCheck(object):
         self.interval_secs = interval_secs
         self.time_passed = 0
         self.already_notified = False
+
+    @abstractproperty
+    def name(self):
+        pass
 
     @abstractmethod
     def is_healthy(self):

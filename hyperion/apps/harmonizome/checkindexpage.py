@@ -9,22 +9,21 @@ from hyperion.healthcheck import HealthCheck
 import hyperion.notifier as notifier
 
 
-class CheckGeneEndpoint(HealthCheck):
+class CheckIndexPage(HealthCheck):
 
-    url = 'http://amp.pharm.mssm.edu/Harmonizome/api/1.0/gene/STAT3'
+    url = 'http://amp.pharm.mssm.edu/Harmonizome'
     subject = 'Error with the Harmonizome'
-    message = 'The /api/1.0/gene/STAT3 endpoint is down.'
-    name = 'STAT3 endpoint'
+    message = 'The index page is unresponsive.'
+    name = 'Index page'
 
     def __init__(self, email):
-        self.email = email
         CHECK_EVERY_SECS = 3600
+        self.email = email
         super(self.__class__, self).__init__(CHECK_EVERY_SECS)
 
     def is_healthy(self):
         data = requests.get(self.url)
-        data = json.loads(data.text)
-        if not data['symbol'] or data['symbol'] != 'STAT3':
+        if data.status_code != 200 or 'harmonizome' in data.text:
             return False
         return True
 
