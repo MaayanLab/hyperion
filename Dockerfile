@@ -1,20 +1,20 @@
-FROM debian:stable
+FROM grahamdumpleton/mod-wsgi-docker:python-3.4-onbuild
 
-RUN apt-get update \
-    apt-get -y install vim
+RUN apt-get update
+RUN apt-get install -y python3.4
 
-RUN apt-get -y install python \
-    apt-get -y install python-dev \
-    apt-get -y install python-pip \
-    apt-get -y install python-setuptools
+RUN apt-get update
+RUN apt-get install -y python3.4-dev
 
-RUN apt-get -y install apache2 \
-    apt-get -y install apache2-prefork-dev \
-    pip install mod_wsgi \
-    pip install -Iv Flask==0.10.1
+RUN apt-get install -y \
+    python3-pip \
+    python-setuptools
+
+RUN pip3 install -Iv Flask==0.10.1 \
+    requests
 
 EXPOSE 80
 
-ADD . /hyperion
+ADD . /app
 
-CMD /hyperion/boot.sh
+CMD [ "hyperion.wsgi" ]

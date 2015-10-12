@@ -14,7 +14,7 @@ from hyperion import config
 import hyperion.tester as tester
 
 
-base = Blueprint('base', __name__, url_prefix=config['DEFAULT']['base_url'])
+base = Blueprint('base', __name__, url_prefix=config.get('general', 'base_url'))
 
 
 @base.route('')

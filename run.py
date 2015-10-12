@@ -1,6 +1,6 @@
 # This is only for development.
 #
-# In production, Flask is run by mod_wsgi, which imports the via wsgi.py.
+# In production, Flask is run by mod_wsgi, which imports the via hyperion.wsgi.
 
 
 from hyperion import app

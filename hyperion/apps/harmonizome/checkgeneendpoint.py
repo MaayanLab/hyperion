@@ -13,7 +13,7 @@ class CheckGeneEndpoint(HealthCheck):
 
     url = 'http://amp.pharm.mssm.edu/Harmonizome/api/1.0/gene/STAT3'
     subject = 'Error with the Harmonizome'
-    message = 'The /api/1.0/gene/STAT3 endpoint is down.'
+    message = 'The endpoint /api/1.0/gene/STAT3 is down.'
     name = 'STAT3 endpoint'
 
     def __init__(self, email):

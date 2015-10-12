@@ -12,20 +12,16 @@ import configparser
 
 from flask import Flask
 
-import hyperion.tester as reg
+import hyperion.tester as tester
 
 
 config = configparser.ConfigParser()
 config.read('hyperion/app.ini')
 
-static_url_path = '/%s/static' % config['DEFAULT']['app_name']
+static_url_path = '/%s/static' % config.get('general', 'app_name')
 app = Flask(__name__, static_url_path=static_url_path, static_folder='static')
 
-if not config.getboolean('DEFAULT', 'debug'):
-    # Configure Apache logging.
-    logging.basicConfig(stream=sys.stderr)
-else:
-    print('Starting in DEBUG mode')
+logging.basicConfig(stream=sys.stderr)
 
 # Connect to DB here, if necessary.
 
@@ -33,6 +29,6 @@ else:
 from hyperion.endpoints.base import base
 app.register_blueprint(base)
 
-# Import health checkers and start checking.
+# Import health checkers and then start.
 import hyperion.apps.harmonizome
-reg.start()
+tester.start()

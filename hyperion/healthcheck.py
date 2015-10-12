@@ -4,11 +4,8 @@
 
 from abc import ABCMeta, abstractmethod, abstractproperty
 
-#from hyperion import config
 
-
-#DEBUG = config.getboolean('DEFAULT', 'debug')
-MIN_INTERVAL = 1#1 if DEBUG else 60
+MIN_INTERVAL = 60
 
 
 class HealthCheck(object):

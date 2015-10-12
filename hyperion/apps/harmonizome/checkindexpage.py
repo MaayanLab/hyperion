@@ -2,7 +2,6 @@
 """
 
 
-import json
 import requests
 
 from hyperion.healthcheck import HealthCheck
@@ -23,7 +22,7 @@ class CheckIndexPage(HealthCheck):
 
     def is_healthy(self):
         data = requests.get(self.url)
-        if data.status_code != 200 or 'harmonizome' in data.text:
+        if data.status_code != 200 or not 'harmonizome' in data.text:
             return False
         return True
 
