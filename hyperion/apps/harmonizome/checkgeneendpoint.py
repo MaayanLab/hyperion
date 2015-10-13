@@ -26,6 +26,3 @@ class CheckGeneEndpoint(HealthCheck):
         if not data['symbol'] or data['symbol'] != 'STAT3':
             return False
         return True
-
-    def on_fail(self):
-        notifier.send(self.email, self.subject, self.message)

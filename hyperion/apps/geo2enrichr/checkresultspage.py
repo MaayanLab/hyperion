@@ -2,19 +2,17 @@
 """
 
 
-import json
 import requests
 
 from hyperion.healthcheck import HealthCheck
-import hyperion.notifier as notifier
 
 
-class CheckSearch(HealthCheck):
+class CheckResultsPage(HealthCheck):
 
-    url = 'http://amp.pharm.mssm.edu/Harmonizome/search?q=STAT3'
-    subject = 'Error with the Harmonizome'
-    message = 'The search endpoint is down.'
-    name = 'Search page'
+    url = 'http://amp.pharm.mssm.edu/g2e/results/9124905f88'
+    subject = 'Error with GEO2Enrichr'
+    message = 'The results page is broken.'
+    name = 'Results page'
 
     def __init__(self, email):
         self.email = email
@@ -22,6 +20,6 @@ class CheckSearch(HealthCheck):
 
     def is_healthy(self):
         data = requests.get(self.url)
-        if not 'STAT3' in data.text:
+        if data.status_code != 200:
             return False
         return True

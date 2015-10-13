@@ -94,6 +94,7 @@ function buildBarChart(results) {
 
 function buildAllTestsChart(results) {
     var $el = $('#all-tests');
+
     $.each(results, function(i, obj) {
         var $table = $('' +
             '<table class="table">' +
@@ -116,7 +117,8 @@ function buildAllTestsChart(results) {
                     '<td class="col-md-4">' +
                         '<a href="' + test.url + '" target="_blank">' + test.name + '</a>' +
                     '</td>' +
-                    '<td class="col-md-8"><span class="glyphicon ' + glyp + ' ' + cssClass + '"></span></td>' +
+                    '<td class="col-md-4"><span class="glyphicon ' + glyp + ' ' + cssClass + '"></span></td>' +
+                    '<td class="col-md-4">' + test.email + '</td>' +
                 '</tr>'
             );
         });

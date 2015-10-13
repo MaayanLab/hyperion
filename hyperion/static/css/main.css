@@ -11,14 +11,14 @@ html {
   min-height: 100%;
 }
 body {
-  margin-bottom: 100px;
+  margin-bottom: 75px;
   /* bottom = footer height */
 }
 #footer {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 100px;
+  height: 75px;
   width: 100%;
 }
 /* General
@@ -29,8 +29,10 @@ h1 {
   font-size: 50px;
   font-weight: bold;
 }
-h2 {
+h1 span {
+  font-family: arial, sans-serif;
   font-size: 16px;
+  font-style: italic;
 }
 .passing {
   color: #50b432;
@@ -53,5 +55,5 @@ a:active {
   background-color: #eeeeee;
 }
 #footer .container {
-  padding-top: 10px;
+  padding-top: 15px;
 }

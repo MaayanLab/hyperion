@@ -20,8 +20,4 @@ base = Blueprint('base', __name__, url_prefix=config.get('general', 'base_url'))
 @base.route('')
 def index_page():
     results = tester.get_status()
-    # results[0]['tests'].append({
-    #     'name': 'fake failing',
-    #     'status': 'failing'
-    # })
     return render_template('index.html', results=json.dumps(results))

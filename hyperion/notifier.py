@@ -8,8 +8,8 @@ from hyperion import config
 
 
 def send(to_address, subject, message):
-    USERNAME = config['DEFAULT']['gmail_username']
-    PASSWORD = config['DEFAULT']['gmail_password']
+    USERNAME = config['general']['gmail_username']
+    PASSWORD = config['general']['gmail_password']
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()

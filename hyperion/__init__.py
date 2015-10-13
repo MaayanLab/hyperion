@@ -31,8 +31,12 @@ app.register_blueprint(base)
 
 # Import health checkers and then start. Each app is responsible for
 # registering its health checks in its __init__.py file.
+import hyperion.apps.chea
 import hyperion.apps.enrichr
+import hyperion.apps.genes2networks
+import hyperion.apps.geo2enrichr
 import hyperion.apps.harmonizome
+import hyperion.apps.kea
 import hyperion.apps.l1000cds2
 import hyperion.apps.lincsdcic
 import hyperion.apps.paea
