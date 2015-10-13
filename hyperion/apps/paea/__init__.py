@@ -1,4 +1,4 @@
-"""Health checks for the L1000CDS2.
+"""Health checks for PAEA.
 """
 
 

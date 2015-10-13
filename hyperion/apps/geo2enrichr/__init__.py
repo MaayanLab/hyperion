@@ -1,4 +1,4 @@
-"""Health checks for Enrichr.
+"""Health checks for GEO2Enrichr.
 """
 
 

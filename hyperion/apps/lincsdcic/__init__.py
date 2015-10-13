@@ -1,4 +1,4 @@
-"""Health checks for the Harmonizome.
+"""Health checks for the LINCS DCIC website.
 """
 
 
@@ -12,8 +12,8 @@ EMAIL = config.get('lincsdcic', 'email')
 
 
 indexPageTest = CheckIndexPage(
-    'http://amp.pharm.mssm.edu/PAEA',
-    'Error with PAEA',
+    'http://lincs-dcic.org/#/',
+    'Error with the LINCS DCIC website',
     EMAIL
 )
 tester.register_health_check(APP_NAME, indexPageTest)

@@ -16,7 +16,7 @@ import hyperion.tester as tester
 
 
 config = configparser.ConfigParser()
-config.read('hyperion/app.ini')
+config.read('hyperion/hyperion.ini')
 
 static_url_path = '/%s/static' % config.get('general', 'app_name')
 app = Flask(__name__, static_url_path=static_url_path, static_folder='static')
