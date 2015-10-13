@@ -9,12 +9,12 @@ from hyperion.healthcheck import HealthCheck
 import hyperion.notifier as notifier
 
 
-class CheckGeneEndpoint(HealthCheck):
+class CheckSearch(HealthCheck):
 
-    url = 'http://amp.pharm.mssm.edu/Harmonizome/api/1.0/gene/STAT3'
+    url = 'http://amp.pharm.mssm.edu/Harmonizome/search?q=STAT3'
     subject = 'Error with the Harmonizome'
-    message = 'The endpoint /api/1.0/gene/STAT3 is down.'
-    name = 'STAT3 endpoint'
+    message = 'The search endpoint is down.'
+    name = 'Search page'
 
     def __init__(self, email):
         self.email = email
@@ -22,8 +22,7 @@ class CheckGeneEndpoint(HealthCheck):
 
     def is_healthy(self):
         data = requests.get(self.url)
-        data = json.loads(data.text)
-        if not data['symbol'] or data['symbol'] != 'STAT3':
+        if not 'STAT3' in data.text:
             return False
         return True
 

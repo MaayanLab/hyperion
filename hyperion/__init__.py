@@ -34,4 +34,6 @@ app.register_blueprint(base)
 import hyperion.apps.enrichr
 import hyperion.apps.harmonizome
 import hyperion.apps.l1000cds2
+import hyperion.apps.lincsdcic
+import hyperion.apps.paea
 tester.start()

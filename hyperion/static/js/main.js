@@ -5,6 +5,8 @@ function main(results) {
 
 function buildBarChart(results) {
 
+    console.log(results);
+
     Highcharts.setOptions({
         colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
     });
@@ -21,13 +23,13 @@ function buildBarChart(results) {
             }
         ];
 
-    $.each(results, function(i, result) {
+    $.each(results, function(appIdx, result) {
         categories.push(result.app);
         $.each(result.tests, function(j, test) {
             if (test.status === 'passing') {
-                add(series[0].data, i);
+                add(series[0].data, appIdx);
             } else {
-                add(series[1].data, i);
+                add(series[1].data, appIdx);
             }
         });
     });

@@ -11,7 +11,7 @@ MIN_INTERVAL = 60
 class HealthCheck(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, interval_secs):
+    def __init__(self, interval_secs=1800):
         if interval_secs < MIN_INTERVAL:
             raise ValueError('Health checks cannot be performed more than once per minute.')
 

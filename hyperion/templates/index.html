@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Hyperion</title>
     <base href="hyperion/"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="static/css/main.css" rel="stylesheet"/>
     <script src="static/js/lib/jquery.js"></script>
@@ -11,13 +12,13 @@
     <script src="static/js/lib/underscore.js"></script>
     <script src="static/js/lib/highcharts.js"></script>
     <script src="static/js/main.js"></script>
-</head>
-<body>
     <script>
         $(function() {
             main({{ results|safe }});
         });
     </script>
+</head>
+<body>
     <div class="container">
         <div class="row">
             <h1>Hyperion</h1>
@@ -28,10 +29,9 @@
             <div id="bar-chart"></div>
         </div>
         <div class="row">
-            <h3>All Health Checks</h3>
+            <h3>Health Checks</h3>
             <div id="all-tests" class="table"></div>
         </div>
     </div>
-
 </body>
 </html>
