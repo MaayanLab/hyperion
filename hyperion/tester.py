@@ -30,9 +30,11 @@ def get_status():
             'tests': []
         }
         for hc in health_checks[app]:
+            #import pdb; pdb.set_trace()
             result['tests'].append({
                 'name': hc.name,
-                'status': 'healthy' if hc.is_healthy() else 'broken'
+                'status': 'passing' if hc.is_healthy() else 'failing',
+                'url': hc.url
             })
         results.append(result)
     return results

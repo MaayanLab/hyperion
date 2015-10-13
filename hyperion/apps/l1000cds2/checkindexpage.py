@@ -2,29 +2,27 @@
 """
 
 
-import json
 import requests
 
 from hyperion.healthcheck import HealthCheck
 import hyperion.notifier as notifier
 
 
-class CheckGeneEndpoint(HealthCheck):
+class CheckIndexPage(HealthCheck):
 
-    url = 'http://amp.pharm.mssm.edu/Harmonizome/api/1.0/gene/STAT3'
-    subject = 'Error with the Harmonizome'
-    message = 'The endpoint /api/1.0/gene/STAT3 is down.'
-    name = 'STAT3 endpoint'
+    url = 'http://amp.pharm.mssm.edu/L1000CDS2'
+    subject = 'Error with L1000CDS2'
+    message = 'The index page is unresponsive.'
+    name = 'Index page'
 
     def __init__(self, email):
-        self.email = email
         CHECK_EVERY_SECS = 1800
+        self.email = email
         super(self.__class__, self).__init__(CHECK_EVERY_SECS)
 
     def is_healthy(self):
         data = requests.get(self.url)
-        data = json.loads(data.text)
-        if not data['symbol'] or data['symbol'] != 'STAT3':
+        if data.status_code != 200:
             return False
         return True
 

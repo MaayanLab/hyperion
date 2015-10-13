@@ -29,6 +29,9 @@ logging.basicConfig(stream=sys.stderr)
 from hyperion.endpoints.base import base
 app.register_blueprint(base)
 
-# Import health checkers and then start.
+# Import health checkers and then start. Each app is responsible for
+# registering its health checks in its __init__.py file.
+import hyperion.apps.enrichr
 import hyperion.apps.harmonizome
+import hyperion.apps.l1000cds2
 tester.start()

@@ -1,0 +1,15 @@
+h1 {
+  border-bottom: 1px solid #dddddd;
+}
+h2 {
+  font-size: 16px;
+}
+.passing {
+  color: #50b432;
+}
+.failing {
+  color: #ed561b;
+}
+table caption {
+  font-weight: bold;
+}

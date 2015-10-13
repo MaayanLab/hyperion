@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title>Hyperion</title>
     <base href="hyperion/"/>
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="static/css/main.css" rel="stylesheet"/>
     <script src="static/js/lib/jquery.js"></script>
+    <script src="static/bootstrap/js/bootstrap.js"/>
+    <script src="static/js/lib/underscore.js"></script>
     <script src="static/js/lib/highcharts.js"></script>
     <script src="static/js/main.js"></script>
 </head>
@@ -14,8 +18,20 @@
             main({{ results|safe }});
         });
     </script>
-    <h1>Hyperion</h1>
-    <h2>Ma'ayan Lab Test Suite</h2>
-    <div id="bar-chart"></div>
+    <div class="container">
+        <div class="row">
+            <h1>Hyperion</h1>
+            <h2>Ma'ayan Lab Application Health Checks</h2>
+        </div>
+        <div class="row">
+            <h3>Summary</h3>
+            <div id="bar-chart"></div>
+        </div>
+        <div class="row">
+            <h3>All Health Checks</h3>
+            <div id="all-tests" class="table"></div>
+        </div>
+    </div>
+
 </body>
 </html>

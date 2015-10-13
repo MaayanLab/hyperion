@@ -1,4 +1,9 @@
 function main(results) {
+    buildBarChart(results);
+    buildAllTestsChart(results);
+}
+
+function buildBarChart(results) {
 
     Highcharts.setOptions({
         colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
@@ -7,7 +12,7 @@ function main(results) {
     var categories = [],
         series = [
             {
-                name: 'healthy',
+                name: 'passing',
                 data: []
             },
             {
@@ -19,7 +24,7 @@ function main(results) {
     $.each(results, function(i, result) {
         categories.push(result.app);
         $.each(result.tests, function(j, test) {
-            if (test.status === 'healthy') {
+            if (test.status === 'passing') {
                 add(series[0].data, i);
             } else {
                 add(series[1].data, i);
@@ -40,7 +45,7 @@ function main(results) {
             type: 'column'
         },
         title: {
-            text: 'Healthy and Failing Tests'
+            text: ''
         },
         xAxis: {
             categories: categories
@@ -78,16 +83,40 @@ function main(results) {
         },
         plotOptions: {
             column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                    style: {
-                        textShadow: '0 0 3px black'
-                    }
-                }
+                stacking: 'normal'
             }
         },
         series: series
+    });
+}
+
+function buildAllTestsChart(results) {
+    var $el = $('#all-tests');
+    $.each(results, function(i, obj) {
+        var $table = $('' +
+            '<table class="table">' +
+                '<caption>' + obj.app + '</caption>' +
+            '</table>'
+        );
+        $el.append($table);
+        $.each(obj.tests, function(j, test) {
+            var glyp,
+                cssClass;
+            if (test.status === 'passing') {
+                glyp = 'glyphicon-ok';
+                cssClass = 'passing';
+            } else {
+                glyp = 'glyphicon-remove';
+                cssClass = 'failing';
+            }
+            $table.append('' +
+                '<tr>' +
+                    '<td class="col-md-4">' +
+                        '<a href="' + test.url + '" target="_blank">' + test.name + '</a>' +
+                    '</td>' +
+                    '<td class="col-md-8"><span class="glyphicon ' + glyp + ' ' + cssClass + '"></span></td>' +
+                '</tr>'
+            );
+        });
     });
 }

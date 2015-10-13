@@ -16,7 +16,7 @@ class CheckIndexPage(HealthCheck):
     name = 'Index page'
 
     def __init__(self, email):
-        CHECK_EVERY_SECS = 3600
+        CHECK_EVERY_SECS = 1800
         self.email = email
         super(self.__class__, self).__init__(CHECK_EVERY_SECS)
 
