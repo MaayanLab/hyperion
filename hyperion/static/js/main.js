@@ -1,11 +1,4 @@
 function main(results) {
-    buildBarChart(results);
-    buildAllTestsChart(results);
-}
-
-function buildBarChart(results) {
-
-    console.log(results);
 
     Highcharts.setOptions({
         colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
@@ -89,38 +82,5 @@ function buildBarChart(results) {
             }
         },
         series: series
-    });
-}
-
-function buildAllTestsChart(results) {
-    var $el = $('#all-tests');
-
-    $.each(results, function(i, obj) {
-        var $table = $('' +
-            '<table class="table">' +
-                '<caption>' + obj.app + '</caption>' +
-            '</table>'
-        );
-        $el.append($table);
-        $.each(obj.tests, function(j, test) {
-            var glyp,
-                cssClass;
-            if (test.status === 'passing') {
-                glyp = 'glyphicon-ok';
-                cssClass = 'passing';
-            } else {
-                glyp = 'glyphicon-remove';
-                cssClass = 'failing';
-            }
-            $table.append('' +
-                '<tr>' +
-                    '<td class="col-md-4">' +
-                        '<a href="' + test.url + '" target="_blank">' + test.name + '</a>' +
-                    '</td>' +
-                    '<td class="col-md-4"><span class="glyphicon ' + glyp + ' ' + cssClass + '"></span></td>' +
-                    '<td class="col-md-4">' + test.email + '</td>' +
-                '</tr>'
-            );
-        });
     });
 }

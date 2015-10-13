@@ -1,6 +1,12 @@
 {% extends 'wrapper.html' %}
 {% block body %}
 
+    <script>
+        $(function() {
+            main({{ results_json|safe }});
+        });
+    </script>
+
     <div class="container">
         <div class="row">
             <h3>Summary</h3>
@@ -8,7 +14,36 @@
         </div>
         <div class="row">
             <h3>Health Checks</h3>
-            <div id="all-tests" class="table"></div>
+
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td class="col-md-3">Test</td>
+                            <td class="col-md-3">Status</td>
+                            <td class="col-md-3">Developer</td>
+                            <td class="col-md-3">Check Interval</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            
+            {% for obj in results %}
+                <table class="table">
+                    <caption>{{ obj.app }}</caption>
+                    {% for test in obj.tests %}
+                        <tr>
+                            {% set glyp = 'ok' if test.status == 'passing' else 'remove' %}
+                            <td class="col-md-3">
+                                <a href="{{ test.url }}" target="_blank">{{ test.name }}</a>
+                            </td>
+                            <td class="col-md-3"><span class="glyphicon  glyphicon-{{ glyp }} {{ test.status }}"></span></td>
+                            <td class="col-md-3">{{ test.email }}</td>
+                            <td class="col-md-3">{{ (test.interval / 60)|round|int }} min.</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
         </div>
     </div>
 

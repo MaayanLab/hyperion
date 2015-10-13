@@ -17,11 +17,6 @@ def register_health_check(app_name, check):
     health_checks[app_name].append(check)
 
 
-def register_health_checks(checks):
-    global health_checks
-    health_checks = health_checks + checks
-
-
 def get_status():
     results = []
     for app in health_checks:
@@ -34,7 +29,8 @@ def get_status():
                 'name': hc.name,
                 'status': 'passing' if hc.is_healthy() else 'failing',
                 'url': hc.url,
-                'email': hc.email
+                'email': hc.email,
+                'interval': hc.interval_secs
             })
         results.append(result)
     return results

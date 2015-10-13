@@ -9,7 +9,6 @@ import hyperion.notifier as notifier
 
 MIN_INTERVAL = 60
 
-
 class HealthCheck(object):
     __metaclass__ = ABCMeta
 
@@ -29,11 +28,8 @@ class HealthCheck(object):
     def is_healthy(self):
         pass
 
-    @abstractmethod
     def on_fail(self):
-        pass
-
-    def on_fail(self):
+        print('Notifying user of failure.')
         notifier.send(self.email, self.subject, self.message)
 
     def interval_secs(self):
