@@ -1,5 +1,32 @@
 @import 'variables.less';
 
+/* Reset
+ * ----- */
+html,
+body {
+    margin: 0;
+}
+
+/* Sticky Footer. Do not change.
+ * ----------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: @dim-footer-height; /* bottom = footer height */
+}
+#footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: @dim-footer-height;
+    width: 100%;
+}
+
+
+/* General
+ * ------- */
 h1 {
     border-bottom: 1px solid @color-gray-light;
     font-family: @font-family-base;
@@ -26,4 +53,13 @@ a:visited,
 a:hover,
 a:active {
     color: @color-link-blue !important;
+}
+
+/* Footer
+ * ------ */
+#footer {
+    background-color: @color-gray-lightest;
+    .container {
+        padding-top: 10px;
+    }
 }

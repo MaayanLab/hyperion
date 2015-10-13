@@ -1,3 +1,28 @@
+/* Reset
+ * ----- */
+html,
+body {
+  margin: 0;
+}
+/* Sticky Footer. Do not change.
+ * ----------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 100px;
+  /* bottom = footer height */
+}
+#footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+}
+/* General
+ * ------- */
 h1 {
   border-bottom: 1px solid #dddddd;
   font-family: 'Open Sans Condensed', sans-serif;
@@ -21,4 +46,12 @@ a:visited,
 a:hover,
 a:active {
   color: #0000cc !important;
+}
+/* Footer
+ * ------ */
+#footer {
+  background-color: #eeeeee;
+}
+#footer .container {
+  padding-top: 10px;
 }

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+{% include 'partial/head.html' %}
+<body>
+    {% include 'partial/header.html' %}
+    <div class="wrapper">
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    {% include 'partial/footer.html' %}
+</body>
